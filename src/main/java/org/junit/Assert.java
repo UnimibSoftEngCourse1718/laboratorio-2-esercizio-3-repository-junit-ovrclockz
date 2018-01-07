@@ -29,7 +29,7 @@ public class Assert {
     }
     
     public static <T> void assertGreaterThan(T o1, T o2, java.util.Comparator<T> comparator) { 
-        assertTrue("Not Greater than!",comparator.compare(o1, o2) > 0);
+        assertTrue("Greater than!",comparator.compare(o1, o2) > 0);
     }
 
 

@@ -1,10 +1,13 @@
 package org.junit.tests.assertion;
 
+import java.util.Comparator;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertGreaterThan;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertNull;
@@ -30,7 +33,25 @@ public class AssertionTest {
 // @Test (expected=AssertionError.class) public void error() {
 //      assert false;
 //  }
-
+    
+    @Test
+    public void greaterThan() {    
+        Integer o1  = 6;
+        Integer o2  = 5;
+        Comparator<Integer> comparator = new Comparator<Integer>() {
+            public int compare(Integer o1, Integer o2) {
+                if(o1 > o2) {
+                    return 1;
+                } else return 0;
+            }          
+        };
+        try {
+            assertGreaterThan(o1,o2,comparator);
+        } catch(AssertionError a) {
+            assertEquals(a.getMessage(),"Not greater than!");
+        }
+    }
+    
     @Test(expected = AssertionError.class)
     public void fails() {
         Assert.fail();
