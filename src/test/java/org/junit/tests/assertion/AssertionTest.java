@@ -5,6 +5,7 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertGreaterThan;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertNull;
@@ -35,6 +36,19 @@ public class AssertionTest {
 //  }
 
     private static final String ASSERTION_ERROR_EXPECTED = "AssertionError expected";
+    
+    @Test
+    public void greaterThan() {     
+        char o1  = 'c';
+        char o2  = 'b';
+        int o3  = 6;
+        int o4  = 5;
+        double o5 = 10.5;
+        double o6 = 10.4;
+        assertGreaterThan(o1, o2);
+        assertGreaterThan(o3, o4);
+        assertGreaterThan(o5, o6);
+    }
 
     @Test(expected = AssertionError.class)
     public void fails() {
