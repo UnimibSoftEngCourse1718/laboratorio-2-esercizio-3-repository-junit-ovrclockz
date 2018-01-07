@@ -31,7 +31,9 @@ public class ResultTest extends TestCase {
 
     private void assertResultSerializable(Result result) throws IOException, ClassNotFoundException {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        new ObjectOutputStream(byteArrayOutputStream).writeObject(result);
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+        objectOutputStream.writeObject(result);
+        objectOutputStream.flush();
         byte[] bytes = byteArrayOutputStream.toByteArray();
         ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(bytes));
         Result fromStream = (Result) objectInputStream.readObject();
@@ -50,6 +52,9 @@ public class ResultTest extends TestCase {
      * This makes values returned by the methods deterministic.
      */
     private static class ResultWithFixedRunTime extends Result {
+
+        private static final long serialVersionUID = 1L;
+
         private final Result delegate;
 
         public ResultWithFixedRunTime(Result delegate) {
